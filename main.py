@@ -35,18 +35,9 @@ def report():
         print(f"{item}: {resources[item]}")
 
 def new_resources(drink):
-    if drink == "cappuccino":
-        resources["water"] -= MENU["cappuccino"]["ingredients"]["water"]
-        resources["milk"] -= MENU["cappuccino"]["ingredients"]["milk"]
-        resources["coffee"] -= MENU["cappuccino"]["ingredients"]["coffee"]
-    if drink == "espresso":
-        resources["water"] -= MENU["espresso"]["ingredients"]["water"]
-        resources["milk"] -= MENU["espresso"]["ingredients"]["milk"]
-        resources["coffee"] -= MENU["espresso"]["ingredients"]["coffee"]
-    if drink == "latte":
-        resources["water"] -= MENU["latte"]["ingredients"]["water"]
-        resources["milk"] -= MENU["latte"]["ingredients"]["milk"]
-        resources["coffee"] -= MENU["latte"]["ingredients"]["coffee"]
+    resources["water"] -= MENU[drink]["ingredients"]["water"]
+    resources["milk"] -= MENU[drink]["ingredients"]["milk"]
+    resources["coffee"] -= MENU[drink]["ingredients"]["coffee"]
 
 
 
@@ -54,7 +45,7 @@ def check_resources(drink):
     if resources["milk"] > MENU[drink]["ingredients"]["milk"]:
         if resources["water"] > MENU[drink]["ingredients"]["water"]:
             if resources["coffee"] > MENU[drink]["ingredients"]["coffee"]:
-                print("sufficient resources")
+                process_coins(drink)
             else:
                 print("There is not enough coffee in the machine to make the drink.")
         else:
@@ -75,6 +66,7 @@ def process_coins(drink):
     else:
         change = Total_money - MENU[drink]["cost"]
         print(f"Here is your {drink} and {change}")
+        new_resources(drink)
 
 
 
@@ -84,19 +76,12 @@ while drink != "off":
 
     if drink == "report":
         report()
-
-    if drink == "cappuccino":
-        if check_resources("cappucino") == "sufficient resources":
-            if process_coins("cappucino") == "Here is your {drink} and {change}":
-                new_resources("cappucino")
+    elif drink == "cappuccino":
+        check_resources("cappucino")
     elif drink == "espresso":
-        if check_resources("espresso") == "sufficient resources":
-            if process_coins("espresso") == "Here is your {drink} and {change}":
-                new_resources("espresso")
+        check_resources("espresso")
     elif drink == "latte":
-        if check_resources("latte") == "sufficient resources":
-            if process_coins("latte") == "Here is your {drink} and {change}":
-                new_resources("latte")
+        check_resources("latte")
     else:
         print("Invalid input!")
 
