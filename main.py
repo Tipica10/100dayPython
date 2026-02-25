@@ -59,13 +59,13 @@ def process_coins(drink):
     nickels = int(input("How many nickels do you have?: "))
     pennies = int(input("How many pennies do you have?: "))
 
-    Total_money = (quarters *0.25) + (dimes * 0.10) * (nickels * 0.05) + (pennies * 0.01)
+    Total_money = (quarters * 0.25) + (dimes * 0.10) + (nickels * 0.05) + (pennies * 0.01)
 
     if Total_money < MENU[drink]["cost"]:
         print("You do not have enough money. Money refunded.")
     else:
-        change = Total_money - MENU[drink]["cost"]
-        print(f"Here is your {drink} and {change}")
+        change = Total_money - int(MENU[drink]["cost"])
+        print(f"Here is your {drink} and ${round(change,2)}")
         new_resources(drink)
 
 
@@ -77,7 +77,7 @@ while drink != "off":
     if drink == "report":
         report()
     elif drink == "cappuccino":
-        check_resources("cappucino")
+        check_resources("cappuccino")
     elif drink == "espresso":
         check_resources("espresso")
     elif drink == "latte":
