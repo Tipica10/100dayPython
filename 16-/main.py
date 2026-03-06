@@ -26,5 +26,9 @@ while name != "off":
         if MoneyMachine.make_payment(cost):
             CoffeeMaker.make_coffee(Menu.find_drink(name))
 
-
+# key learning points:
+# - read the documentation of all the classes
+#   - it clearly says things like: certain methods return the MenuItem instance.
+#   - therefore, it would have been easier to say: drink = Menu.find_drink(name) and then all the other code would be more concise
+#   - an instance of a class is normally always lowercase
 
