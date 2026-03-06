@@ -4,11 +4,17 @@ from money_machine import MoneyMachine
 
 
 Menu = Menu()
-MenuItem =
+# MenuItem =
 CoffeeMaker = CoffeeMaker()
 MoneyMachine = MoneyMachine()
 
 drinks = Menu.get_items()
+
+cost = 0
+
+for item in Menu.menu:
+    cost = item.cost
+
 
 name = "on"
 while name != "off":
@@ -16,10 +22,9 @@ while name != "off":
     if name == "report":
         CoffeeMaker.report()
         MoneyMachine.report()
-    if name == Menu.find_drink(name):
-        if CoffeeMaker.is_resource_sufficient(name):
-            MoneyMachine.process_coins()
-            if MoneyMachine.make_payment()
+    if Menu.find_drink(name) and CoffeeMaker.is_resource_sufficient(Menu.find_drink(name)):
+        if MoneyMachine.make_payment(cost):
+            CoffeeMaker.make_coffee(Menu.find_drink(name))
 
 
 
