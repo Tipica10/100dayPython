@@ -1,13 +1,14 @@
 ###This code will not work in repl.it as there is no access to the colorgram package here.###
 ##We talk about this in the video tutorials##
+import random
+
 import colorgram
 import turtle as t
 from turtle import Screen
 
 tim = t.Turtle()
-tim.penup()
+
 t.colormode(255)
-start = tim.setpos(-200,-200)
 
 #getting colours frim image
 rgbcolors = []
@@ -21,13 +22,34 @@ for color in colors:
 
 print(rgbcolors)
 
-for i in range(6):
-    tim.setpos(-200, -200)
-    tim.sety(50 * (i-1))
-    for i in range(10):
-        tim.penup()
-        tim.dot(10,rgbcolors[i])
+# tim.setpos(-200,-200)
+#
+#
+# for i in range(6):
+#     tim.sety(50 * (i-1))
+#     tim.setx(-100)
+#     for i in range(10):
+#         tim.penup()
+#         tim.dot(10,random.choice(rgbcolors))
+#         tim.forward(50)
+tim.penup()
+tim.setheading(225)
+tim.forward(250)
+tim.setheading(0)
+num_of_dots = 100
+tim.speed(10)
+
+
+for dot_count in range(1, num_of_dots + 1):
+    tim.dot(20,random.choice(rgbcolors))
+    tim.forward(50)
+
+    if dot_count % 10 == 0:
+        tim.left(90)
         tim.forward(50)
+        tim.left(90)
+        tim.forward(500)
+        tim.setheading(0)
 
 
 screen = Screen()
