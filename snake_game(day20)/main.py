@@ -9,7 +9,7 @@ screen.setup(width=600,height=600)
 screen.bgcolor("black")
 screen.title("My Snake Game")
 screen.tracer(0)
-# turning tracer off tells Turtle not he redraw the screen auto
+# turning tracer off tells Turtle not he re draw the screen auto
 
 snake = Snake()
 food = Food()
@@ -32,6 +32,10 @@ while game_is_on:
     # refresh screen
     # wait
     # repeat
+
+    #tim.sleep() is used as without this the snake is uncontrollable,
+    #bigger - slower snake
+
 
     #detect collision with food
     if snake.head.distance(food) < 15:
