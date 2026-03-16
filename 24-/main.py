@@ -8,17 +8,22 @@
         #Hint3: THis method will help you: https://www.w3schools.com/python/ref_string_strip.asp
 
 
-with open("./Input/Names/invited_names.txt", mode = 'r') as file:
+with open("./Input/Names/invited_names.txt") as file:
     contents = file.readlines()
 
-print(contents)
 
+
+with open("./Input/Letters/starting_letter.txt") as template:
+    letter_template = template.read()
 
 for name in contents:
-    with open("./Input/Letters/starting_letter.txt", mode='a') as template:
-        txt = "[name]"
-        saved_letter = template.write(txt.replace("[name]",name))
+    clean_name = name.strip()
+    saved_letter = letter_template.replace("[name]", clean_name)
+
+    with open (f"./Output/ReadyToSend/Letter_to_{clean_name}.txt", "w") as letter_to_send:
+        letter_to_send.write(saved_letter)
 
 
-print(saved_letter)
+
+
 
