@@ -10,13 +10,15 @@ turtle.shape(image)
 data = pandas.read_csv("50_states.csv")
 states = data["state"].to_list()
 guessed_states = []
-states_to_learn = []
 
 
 while len(guessed_states) < 50:
     answer_state = screen.textinput(title= f"{len(guessed_states)}/52 states guessed", prompt = "What's another state's name?" ).title()
 
     if answer_state == "Exit":
+        states_to_learn = [state for state in states if state not in guessed_states]
+        to_learn = pandas.DataFrame(states_to_learn)
+        to_learn.to_csv("states_to_learn.csv")
         break
 
     if answer_state in states:
@@ -32,11 +34,3 @@ while len(guessed_states) < 50:
         text.penup()
         text.goto(x_cor, y_cor)
         text.write(f"{answer_state}", False, "center", ("Arial", 8, "normal"))
-
-
-for state in states:
-    if state not in guessed_states:
-        states_to_learn.append(state)
-
-to_learn = pandas.DataFrame(states_to_learn)
-to_learn.to_csv("states_to_learn.csv")
